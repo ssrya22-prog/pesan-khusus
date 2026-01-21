@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5 Card Password Fleksibel</title>
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #1a0a1a; /* hitam gelap ala halaman 7 */
+    font-family: 'Georgia', 'Times New Roman', serif;
+    text-align: center;
+}
+
+h1 {
+    color: #ffbfdc; /* sama dengan warna card */
+    font-family: 'Brush Script MT', cursive;
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: #ffbfdc; /* pink lembut ala halaman 7 */
+    width: 350px;
+    margin: 20px auto;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(255, 80, 150, 0.4);
+    color: #4b0033;
+    text-align: center;
+}
+
+h2 {
+    color: #6b003f; /* heading pink gelap */
+    margin-bottom: 10px;
+}
+
+.hint {
+    font-size: 14px;
+    color: #4b0033aa;
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"] {
+    padding: 12px;
+    width: 80%;
+    font-size: 16px;
+    border-radius: 15px;
+    border: 1px solid #ff4f9a;
+    margin-top: 15px;
+    text-align: center;
+    background-color: #fff0f5;
+    color: #4b0033;
+}
+
+button {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background-color: #ff4f9a; /* pink cerah */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    animation: pulse 1.4s infinite;
+    transition: all 0.3s ease;
+}
+
+/* pulse tombol */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* hover effect tombol */
+button:hover {
+    transform: scale(1.2);
+    animation: none;
+    background-color: #ff1f6d; /* pink lebih gelap */
+}
+
+.error {
+    color: #ff1f6d;
+    margin-top: 10px;
+    display: none;
+    font-weight: bold;
+}
+
+.correct {
+    background-color: #ff9ecf;
+}
+
+.wrong {
+    border: 2px solid red;
+    animation: shake 0.3s;
+}
+
+.success {
+    color: #ff1f6d;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Animasi shake */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}
+</style>
+</head>
+<body>
+
+<h1>Silahkan dijawab sayangkuu</h1>
+
+<!-- Card 1 -->
+<div class="card" id="card1">
+    <h2>Apa warna kesukaan Surya?</h2>
+    <input type="text" id="password1" placeholder="Jawaban Card 1">
+    <p class="error" id="error1">Jawaban salah!</p>
+</div>
+
+<!-- Card 2 -->
+<div class="card" id="card2">
+    <h2>Berapa tanggal lahir Surya?</h2>
+    <small class="hint">Contoh format: 10/10/1910</small>
+    <input type="text" id="password2" placeholder="Jawaban Card 2">
+    <p class="error" id="error2">Jawaban salah!</p>
+</div>
+
+<!-- Card 3 -->
+<div class="card" id="card3">
+    <h2>Dikota manakah Surya tinggal?</h2>
+    <input type="text" id="password3" placeholder="Jawaban Card 3">
+    <p class="error" id="error3">Jawaban salah!</p>
+</div>
+
+<!-- Card 4 -->
+<div class="card" id="card4">
+    <h2>Diprovinsi manakah Surya tinggal?</h2>
+    <input type="text" id="password4" placeholder="Jawaban Card 4">
+    <p class="error" id="error4">Jawaban salah!</p>
+</div>
+
+<!-- Card 5 -->
+<div class="card" id="card5">
+    <h2>Dinegara manakah Surya tinggal?</h2>
+    <input type="text" id="password5" placeholder="Jawaban Card 5">
+    <p class="error" id="error5">Jawaban salah!</p>
+</div>
+
+<!-- Tombol Submit Semua -->
+<button onclick="checkAllPasswords()">Submit Semua</button>
+
+<p class="success" id="successMsg"></p>
+
+<script>
+    const answers = {
+        1: "hitam",
+        2: "22/10/2004",
+        3: "makassar",
+        4: "sulawesi selatan",
+        5: "indonesia"
+    };
+
+    function normalizeFlexible(input) {
+        return input.replace(/\s+/g, ' ').trim().toLowerCase();
+    }
+
+    function checkAllPasswords() {
+        let allCorrect = true;
+
+        for (let i = 1; i <= 5; i++) {
+            const inputEl = document.getElementById("password" + i);
+            const input = inputEl.value;
+            const errorMsg = document.getElementById("error" + i);
+            const cardEl = document.getElementById("card" + i);
+
+            if (normalizeFlexible(input) === normalizeFlexible(answers[i])) {
+                errorMsg.style.display = "none";
+                cardEl.classList.add("correct");
+                cardEl.classList.remove("wrong");
+                inputEl.disabled = true;
+            } else {
+                errorMsg.style.display = "block";
+                cardEl.classList.add("wrong");
+                cardEl.offsetWidth;
+                cardEl.classList.remove("wrong");
+                void cardEl.offsetWidth;
+                cardEl.classList.add("wrong");
+                allCorrect = false;
+            }
+        }
+
+        const successMsg = document.getElementById("successMsg");
+
+        if (allCorrect) {
+            successMsg.textContent = "Semua jawaban benar! 🎉";
+            window.location.href = "israhalaman4.html";
+        } else {
+            successMsg.textContent = "";
+        }
+    }
+</script>
+
+</body>
+</html>

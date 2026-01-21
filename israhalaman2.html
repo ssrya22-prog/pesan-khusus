@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Pertamaku</title>
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1a0a1a; /* hitam gelap seperti halaman 7 */
+    font-family: 'Georgia', 'Times New Roman', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background-color: #ffbfdc; /* pink lembut ala halaman 7 */
+    width: 350px;
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(255, 80, 150, 0.4);
+    text-align: center;
+    color: #4b0033; /* teks gelap kontras */
+}
+
+h1 {
+    color: #6b003f; /* pink gelap ala signature */
+    font-family: 'Brush Script MT', cursive;
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+p {
+    line-height: 1.6;
+    margin-bottom: 10px;
+    color: #4b0033;
+    font-size: 16px;
+}
+
+.next-button {
+    margin-top: 20px;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 50px;
+    border: none;
+    background-color: #ff4f9a; /* pink cerah */
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    animation: pulse 1.4s infinite;
+    transition: all 0.3s ease;
+}
+
+/* Pulse effect tombol */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Hover effect */
+.next-button:hover {
+    transform: scale(1.2);
+    animation: none; /* hentikan pulse saat hover */
+    background-color: #ff1f6d; /* pink lebih gelap saat hover */
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h1>Haii sayangkuuuu...</h1>
+    <p>Gimana harinya?</p>
+    <p>Baik kannnn!!!</p>
+    <p>Semoga baik dehhh</p>
+    <p>
+        Cowomu ini mau menyampaikan sesuatu sama bubuppp.<br>
+        Tapi sebelum itu bubup harus jawab pertanyaan Surya dulu nih hehe,<br>
+        itung-itung ngetes seberapa kenal bubup dengan Suryaa?<br>
+        (ehh tapi ingat yahh jawabannya harus bener!! kalau salah bubup gabakal bisa lanjutt hihihi)
+    </p>
+
+    <button class="next-button" onclick="location.href='israhalaman3.html'">
+        💗 KLIK DISINI SAYANG 💗
+    </button>
+</div>
+
+</body>
+</html>

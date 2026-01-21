@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Isra Halaman 7</title>
+
+<style>
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: radial-gradient(circle at top, #1a0010, #000000);
+    padding: 50px 20px;
+    text-align: center;
+    color: #ffd6e8;
+}
+
+.card {
+    background: linear-gradient(180deg, #12000a, #2a0018);
+    width: 600px;
+    max-width: 92%;
+    margin: auto;
+    padding: 55px 45px;
+    border-radius: 16px;
+    box-shadow: 0 0 40px rgba(255, 64, 129, 0.35);
+    text-align: left;
+    line-height: 2;
+}
+
+.paragraph {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 1.8s ease, transform 1.8s ease;
+    margin-bottom: 26px;
+    color: #ffd1e3;
+}
+
+.paragraph.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.button-area {
+    text-align: center;
+    margin-top: 45px;
+}
+
+.next-button {
+    display: none;
+    padding: 16px 40px;
+    font-size: 20px;
+    font-family: inherit;
+    color: #fff;
+    background: linear-gradient(135deg, #ff4f9a, #ff1f6d);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 0 25px rgba(255, 79, 154, 0.7);
+    transition: all 0.4s ease;
+}
+
+.next-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px rgba(255, 79, 154, 1);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+    100% { transform: scale(1); }
+}
+
+#finalBtn {
+    animation: pulse 2.2s infinite;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<p class="paragraph">
+bubup sudah baca yahh? aaaa terimakasihh bubup sudah membaca pesan surya yang sangatttttttttt panjang ituu hehee
+</p>
+
+<p class="paragraph">
+ohh iya bupp, bubup liatkan dibawah ada tombol?
+</p>
+
+<p class="paragraph">
+nahh sebelum bubup klik tombol itu Surya mau bubup ngelakuin beberapa hal. dibaca dan disimak baik baik yahh bupp!!!
+</p>
+
+<p class="paragraph">
+pertama, bubub harus tutup mata bubup.<br>
+kedua, bubup harus balik badan.<br>
+ketiga, bubup hitung sampai 3 (pake suara yahh jangan dalam hati) dihitungan ke 3 bubup silahkan buka mataa.
+</p>
+
+<p class="paragraph">
+nahh ketiga hal itu bubup harus lakuin setelah bubup klik tombol dibawah ini yahhhhh!!!!
+</p>
+
+<div class="button-area">
+    <button class="next-button" id="finalBtn">Klik di sini</button>
+</div>
+
+</div>
+
+<script>
+const paragraphs = document.querySelectorAll(".paragraph");
+const finalBtn = document.getElementById("finalBtn");
+
+let i = 0;
+const delayPerParagraph = 2200; // ⏱️ ubah ke 2500 / 3000 jika mau lebih lambat
+
+function showNext() {
+    if (i < paragraphs.length) {
+        paragraphs[i].classList.add("visible");
+        i++;
+        setTimeout(showNext, delayPerParagraph);
+    } else {
+        setTimeout(() => {
+            finalBtn.style.display = "inline-block";
+        }, 1600);
+    }
+}
+
+showNext();
+
+finalBtn.onclick = () => {
+    window.location.href = "israhalaman8.html";
+};
+</script>
+
+</body>
+</html>

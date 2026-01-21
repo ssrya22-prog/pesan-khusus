@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Halaman 8 – Confetti Love 3 Detik</title>
+
+<style>
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* CARD PINK */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 30px;
+  background: linear-gradient(135deg, #ff4f9a, #ff1f6d);
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(255, 79, 154, 0.7);
+  z-index: 10;
+  max-width: 520px;
+  width: 90%;
+}
+
+/* TOMBOL HORIZONTAL */
+.button-group {
+  display: flex;
+  gap: 30px;
+  flex-wrap: nowrap;
+}
+
+/* BUTTON PINK LEBIH GELAP */
+.choice-btn {
+  padding: 20px 38px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+
+  /* pink lebih gelap dari card */
+  background: linear-gradient(135deg, #c2185b, #8e0038);
+
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+
+  box-shadow: 0 0 25px rgba(255, 79, 154, 0.9);
+  transition: transform 0.3s, box-shadow 0.3s;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.choice-btn:hover {
+  animation: none;
+  transform: scale(1.15);
+  background: linear-gradient(135deg, #ad1457, #6a0028);
+  box-shadow: 0 0 45px rgba(255, 79, 154, 1);
+}
+
+/* CANVAS CONFETTI */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="button-group">
+    <button class="choice-btn" onclick="startConfetti()">Diterima</button>
+    <button class="choice-btn" onclick="startConfetti()">Sangat Menerimaaaaaaa!!!!</button>
+  </div>
+</div>
+
+<canvas id="confetti-canvas"></canvas>
+
+<script>
+const canvas = document.getElementById('confetti-canvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let hearts = [];
+let confettiRunning = false;
+
+class Heart {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = 18 + Math.random() * 22;
+    this.speedX = (Math.random() - 0.5) * 2;
+    this.speedY = (Math.random() - 0.5) * 2;
+    this.opacity = 0.8 + Math.random() * 0.2;
+    this.color = `hsl(${330 + Math.random()*30}, 100%, 70%)`;
+    this.floatOffset = Math.random() * Math.PI * 2;
+    this.life = 3000;
+    this.birthTime = Date.now();
+  }
+
+  draw() {
+    ctx.font = `${this.size}px Arial`;
+    ctx.fillStyle = this.color;
+    ctx.globalAlpha = this.opacity;
+    ctx.fillText('♥', this.x, this.y);
+    ctx.globalAlpha = 1;
+  }
+
+  update() {
+    this.x += this.speedX + Math.sin(this.floatOffset) * 0.5;
+    this.y += this.speedY + Math.cos(this.floatOffset) * 0.5;
+    this.floatOffset += 0.02;
+
+    const age = Date.now() - this.birthTime;
+    if (age > this.life) {
+      this.opacity -= 0.03;
+    }
+    this.draw();
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  hearts.forEach((h, i) => {
+    h.update();
+    if (h.opacity <= 0) hearts.splice(i, 1);
+  });
+  requestAnimationFrame(animate);
+}
+
+function startConfetti() {
+  if (confettiRunning) return;
+  confettiRunning = true;
+
+  const interval = setInterval(() => {
+    for (let i = 0; i < 5; i++) {
+      hearts.push(new Heart());
+    }
+  }, 100);
+
+  setTimeout(() => clearInterval(interval), 3000);
+  animate();
+
+  setTimeout(() => {
+    window.location.href = "israhalaman9.html";
+  }, 3500);
+}
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
+
+</body>
+</html>
