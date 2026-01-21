@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Video</title>
+
+<style>
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+/* ================= LOVE KECIL ================= */
+.love {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: rgba(255, 80, 150, 0.8);
+  transform: rotate(-45deg);
+  animation: floatUp linear infinite;
+}
+
+.love::before,
+.love::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: rgba(255, 80, 150, 0.8);
+  border-radius: 50%;
+}
+
+.love::before { top: -11px; left: 0; }
+.love::after  { left: 11px; top: 0; }
+
+@keyframes floatUp {
+  from { transform: translateY(100vh) rotate(-45deg); opacity: 0; }
+  20%  { opacity: 1; }
+  to   { transform: translateY(-120vh) rotate(-45deg); opacity: 0; }
+}
+
+/* ================= LOVE BESAR (TOMBOL) ================= */
+#startScreen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.big-heart {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  background: #ff2f87;
+  transform: rotate(-45deg);
+  cursor: pointer;
+  animation: pulse 1.4s infinite;
+  box-shadow: 0 0 35px rgba(255,47,135,0.9);
+}
+
+.big-heart::before,
+.big-heart::after {
+  content: "";
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  background: #ff2f87;
+  border-radius: 50%;
+}
+
+.big-heart::before { top: -80px; left: 0; }
+.big-heart::after  { left: 80px; top: 0; }
+
+.big-heart span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  pointer-events: none;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+@keyframes pulse {
+  0% { transform: scale(1) rotate(-45deg); }
+  50% { transform: scale(1.12) rotate(-45deg); }
+  100% { transform: scale(1) rotate(-45deg); }
+}
+
+/* ================= VIDEO ================= */
+video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: black;
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<!-- LOVE KECIL -->
+<script>
+for (let i = 0; i < 30; i++) {
+  const love = document.createElement("div");
+  love.className = "love";
+  love.style.left = Math.random() * 100 + "vw";
+  love.style.animationDuration = (6 + Math.random() * 6) + "s";
+  love.style.animationDelay = Math.random() * 6 + "s";
+  document.body.appendChild(love);
+}
+</script>
+
+<!-- LOVE BESAR -->
+<div id="startScreen">
+  <div class="big-heart" id="startBtn">
+    <span>klik<br>aku</span>
+  </div>
+</div>
+
+<!-- VIDEO CLOUDINARY -->
+<video id="video" playsinline></video>
+
+<script>
+const btn = document.getElementById("startBtn");
+const screen = document.getElementById("startScreen");
+const video = document.getElementById("video");
+
+btn.addEventListener("click", () => {
+  screen.style.display = "none";
+  video.style.display = "block";
+  video.src = "https://res.cloudinary.com/dubw1a1io/video/upload/v1769018821/lv_0_20260122014240_efjhxu.mp4";
+  video.muted = false;
+  video.volume = 1;
+  video.play();
+});
+</script>
+
+</body>
+</html>
